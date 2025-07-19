@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frame Viewer</title>
+</head>
+
+<body>
+    <!-- Page Title -->
+    <h1>Frame Viewer</h1>
+
+    <!-- Display Frame Image -->
+    <div>
+        <!-- Dynamically load the frame image based on frame_path from the server -->
+        <img src="{{ url_for('static', filename='saved_frames/' ~ frame_path) }}" alt="Frame {{ frame_index }}" width="600">
+    </div>
+
+    <!-- Form to Delete or Continue -->
+    <form method="POST">
+        <!-- Button to delete the frame -->
+        <button type="submit" name="action" value="delete">Delete</button>
+        <!-- Button to continue (move to the next frame) -->
+        <button type="submit" name="action" value="continue">Continue</button>
+    </form>
+
+    <!-- Link to go back to the saved frames list -->
+    <br>
+    <a href="{{ url_for('view_saved_frames') }}">Back to List</a>
+</body>
+
+</html>

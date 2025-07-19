@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weapon Detection System</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Container styling for main content */
+        .container {
+            padding: 20px;
+        }
+
+        /* Headings styling */
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        /* Form styling */
+        form {
+            margin-bottom: 20px;
+        }
+
+        /* Button styling */
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Dropdown select styling */
+        select {
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        /* Flash message container styling */
+        .messages {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for messages list */
+        .messages ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .messages li {
+            margin-bottom: 5px;
+            color: #d9534f;
+        }
+
+        /* Frame container styling */
+        .frame-container {
+            margin-top: 20px;
+        }
+
+        /* Image display styling */
+        .frame-container img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Weapon Detection System</h1>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        
+        <!-- Display Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="messages">
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Select YOLO Model Button -->
+        <a href="{{ url_for('select_model') }}">
+            <button style="background-color: #007BFF; color: white;">Select YOLO Model</button>
+        </a>
+
+        <!-- Upload Video Form -->
+        <h2>Upload a Video for Detection</h2>
+        <form action="/upload_video" method="POST" enctype="multipart/form-data">
+            <input type="file" name="video" required>
+            <button type="submit">Upload and Detect</button>
+        </form>
+
+        <!-- Live Camera Feed Button (commented out) -->
+        <!-- 
+        <h2>Live Camera Feed</h2>
+        <a href="/live_feed">
+            <button>Start Live Detection</button>
+        </a>
+        -->
+
+        <!-- View Saved Frames Button -->
+        <h2>View Saved Frames</h2>
+        <a href="/view_saved_frames">
+            <button>View Frames</button>
+        </a>
+
+        <!-- Dataset Preparation Button -->
+        <h2>Dataset Preparation</h2>
+        <form method="POST" action="/prepare_dataset">
+            <button type="submit">Prepare Dataset</button>
+        </form>
+
+        <!-- Start Fine-Tuning Button -->
+        <form action="/start_fine_tuning" method="POST">
+            <button type="submit" style="background-color: #4CAF50; color: white;">Start Fine-Tuning</button>
+        </form>
+
+        <!-- Flash Messages for Fine-Tuning -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+
+</html>

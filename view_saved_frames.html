@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Frames</title>
+</head>
+
+<body>
+    <!-- Page Title -->
+    <h1>Saved Frames</h1>
+
+    <!-- Display List of Saved Frames -->
+    <ul>
+        {% for frame in saved_frames %}
+        <li>
+            <!-- Link to show individual frame -->
+            <a href="{{ url_for('show_frame', frame_index=loop.index0) }}">
+                <!-- Display thumbnail image of the frame -->
+                <img src="{{ url_for('static', filename='saved_frames/' ~ frame) }}" alt="Frame {{ loop.index }}" width="200">
+            </a>
+            <!-- Label for the frame index -->
+            <p>Frame {{ loop.index }}</p>
+        </li>
+        {% else %}
+        <!-- Message when no frames are saved -->
+        <li>No frames saved.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Link to return to the home page -->
+    <a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+
+</html>
